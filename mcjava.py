@@ -34,8 +34,9 @@ class FileChangeHandler(FileSystemEventHandler):
                 print(line, end="")
                 line = self.file.readline()
 
-                match = re.match(JOIN_RE, line)
                 payload = None
+
+                match = re.match(JOIN_RE, line)
                 if match:
                     print("[LOGIN] joined the game", match.group(1))
                     payload = {
