@@ -8,8 +8,8 @@ import requests
 from watchdog.events import FileSystemEventHandler
 from watchdog.observers import Observer
 
-JOIN_RE = r"(.*) joined the game"
-LEFT_RE = r"(.*) left the game"
+JOIN_RE = r": (.*) joined the game"
+LEFT_RE = r": (.*) left the game"
 
 
 def _send_webhook(webhook_url, payload):
@@ -36,7 +36,7 @@ class FileChangeHandler(FileSystemEventHandler):
 
                 payload = None
 
-                match = re.match(JOIN_RE, line)
+                match = re.search(JOIN_RE, line)
                 if match:
                     print("[LOGIN] joined the game", match.group(1))
                     payload = {
@@ -44,7 +44,7 @@ class FileChangeHandler(FileSystemEventHandler):
                         "content": f"{match.group(1)} がサーバーに入りました",
                     }
 
-                match = re.match(LEFT_RE, line)
+                match = re.search(LEFT_RE, line)
                 if match:
                     print("[LOGIN] left the game", match.group(1))
                     payload = {
