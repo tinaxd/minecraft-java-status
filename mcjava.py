@@ -32,11 +32,9 @@ class FileChangeHandler(FileSystemEventHandler):
             line = self.file.readline()
             while line:
                 print(line, end="")
-                line = self.file.readline()
 
                 payload = None
 
-                print("line: ", repr(line))
                 match = re.search(JOIN_RE, line)
                 if match:
                     print("[LOGIN] joined the game", match.group(1))
@@ -59,6 +57,8 @@ class FileChangeHandler(FileSystemEventHandler):
                         target=_send_webhook, args=(self.webhook_url, payload)
                     )
                     thr.start()
+
+                line = self.file.readline()
 
     def close(self):
         self.file.close()
