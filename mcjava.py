@@ -52,3 +52,7 @@ def main():
     finally:
         event_handler.close()
     observer.join()
+
+
+if __name__ == "__main__":
+    main()
