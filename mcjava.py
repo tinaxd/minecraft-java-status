@@ -39,9 +39,7 @@ def main():
 
     event_handler = FileChangeHandler(filename)
     observer = Observer()
-    observer.schedule(
-        event_handler, path=".".join(filename.split(".")[:-1]), recursive=False
-    )
+    observer.schedule(event_handler, path=filename, recursive=False)
     observer.start()
 
     try:
