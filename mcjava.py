@@ -37,7 +37,7 @@ class FileChangeHandler(FileSystemEventHandler):
                 match = re.match(JOIN_RE, line)
                 payload = None
                 if match:
-                    print("[LOGIN] join", match.group(1))
+                    print("[LOGIN] joined the game", match.group(1))
                     payload = {
                         "username": "Minecraft Watch",
                         "content": f"{match.group(1)} がサーバーに入りました",
@@ -45,7 +45,7 @@ class FileChangeHandler(FileSystemEventHandler):
 
                 match = re.match(LEFT_RE, line)
                 if match:
-                    print("[LOGIN] left", match.group(1))
+                    print("[LOGIN] left the game", match.group(1))
                     payload = {
                         "username": "Minecraft Watch",
                         "content": f"{match.group(1)} がサーバーから退出しました",
